@@ -1,0 +1,39 @@
+.cards{
+    display: flex;
+    white-space: wrap;
+    gap: 10px;
+    flex-direction: column;
+}
+.card{
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    background-color: rgb(254, 254, 254);
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+.card:hover{
+    background-color: #ffffff6d;
+    color: #fff;
+}
+.card img{
+    height: 250px;
+    width: 250px;
+    border-radius: 20px;
+}
+p{
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 500;
+}
+@media screen and (max-width:700px)
+{
+    .card{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

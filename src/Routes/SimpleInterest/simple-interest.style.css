@@ -1,0 +1,46 @@
+.simp-interest{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: solid 1px #4b4b4b;
+    border-radius: 7px;
+    padding: 10px;
+}
+.result{
+    height: 100px;
+    width: 300px;
+    background-color: greenyellow;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+input{
+    height: 70px;
+    width: 300px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 550;
+    padding: 10px;
+}
+.buttonContainer{
+    display: flex;
+    gap: 70px;
+}
+button{
+    height: 60px;
+    width: 100px;
+    background-color: rgb(75, 75, 240);
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+button:active{
+    transform: scale(0.95);
+}

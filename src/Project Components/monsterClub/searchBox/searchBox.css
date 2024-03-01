@@ -1,0 +1,9 @@
+.monster-search-box{
+    outline: none;
+    height: 50px;
+    width: 400px;
+    border-radius: 8px;
+    padding: 0px 8px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
