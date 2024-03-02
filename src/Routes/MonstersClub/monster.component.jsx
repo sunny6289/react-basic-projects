@@ -8,6 +8,7 @@ const Monster = ()=>{
   const [curr_monsters,setCurrMonsters] = useState(monsters);
 
   useEffect(()=>{
+    document.title = "Monster's Club";
     fetch('https://jsonplaceholder.typicode.com/users')
     .then((res) => res.json())
     .then((user) => setMonsters(user))

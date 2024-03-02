@@ -1,7 +1,7 @@
 
 import Input from '../../Project Components/simpleInterest/Input/input.component';
 import Button from '../../Project Components/simpleInterest/button/button.component';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './simple-interest.style.css';
 
 const SimpleInterest = ()=>{
@@ -9,6 +9,10 @@ const SimpleInterest = ()=>{
   const [interest, setInterest] = useState('');
   const [time, setTime] = useState('');
   const [result, setResult] = useState('');
+
+  useEffect(()=>{
+    document.title = "Simple Interest Calculator";
+  },[]);
 
   const amntChange = (e) => {
     setAmnt(e.target.value);
