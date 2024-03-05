@@ -25,7 +25,11 @@ const SimpleInterest = ()=>{
   }
 
   const calculate = () => {
-    setResult((Number(amnt) * Number(time) * Number(interest)) / 100);
+    if(Number(amnt) && Number(time) && Number(interest)){
+      setResult((Number(amnt) * Number(time) * Number(interest)) / 100);
+    }else{
+      alert("All the fields are required.");
+    }
   }
   const reset = () => {
     setAmnt('');

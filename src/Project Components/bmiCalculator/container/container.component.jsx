@@ -49,6 +49,10 @@ const Container = (props)=>{
     }
     // To set the value of BMI and show result
     const onSubmit =()=>{
+        if(Number(weight)===0 || Number(height)===0){
+            alert("All fields are required");
+            return;
+        }
         document.querySelector(".bmiValue").style.opacity = 1;
         document.querySelector(".remark").style.opacity = 1;
         setBmiVal(Number(weight)/(Number(height)*Number(height)));

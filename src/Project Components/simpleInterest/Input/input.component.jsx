@@ -1,7 +1,7 @@
 
 const Input = ({className,onChange,placeholder,value})=>{
 return(
-    <input type="number" className={className} onChange={onChange} placeholder={placeholder} value={value}/>
+    <input type="number" required className={className} onChange={onChange} placeholder={placeholder} value={value}/>
 )
 }
 export default Input;
