@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import './simple-interest.style.css';
 
 const SimpleInterest = ()=>{
-    const [amnt, setAmnt] = useState('');
+  const [amnt, setAmnt] = useState('');
   const [interest, setInterest] = useState('');
   const [time, setTime] = useState('');
   const [result, setResult] = useState('');

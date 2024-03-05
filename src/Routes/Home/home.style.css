@@ -20,4 +20,5 @@ html , body{
     background-color: rgba(255, 255, 255, 0.781);
     gap: 5px;
     padding: 8px;
+    background-color: black;
 }
