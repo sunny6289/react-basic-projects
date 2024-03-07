@@ -1,0 +1,28 @@
+.navbar{
+    height: 10vh;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+.heading{
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 600;
+}
+.auth-page-link{
+    text-decoration: none;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 550;
+    transition: all ease 0.3s;
+}
+.auth-page-link:hover{
+    background-color: #ffffff75;
+    transform: scale(0.90);
+}
