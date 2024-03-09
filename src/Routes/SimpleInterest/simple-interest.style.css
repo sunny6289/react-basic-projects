@@ -7,6 +7,9 @@
     border-radius: 7px;
     padding: 10px;
 }
+.heading{
+    color: #000;
+}
 .result{
     height: 100px;
     width: 300px;

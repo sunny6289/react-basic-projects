@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../../Contexts/user.context";
 import './navigation.styles.css';
+import { useContext } from "react";
 
 const Navigation = ()=>{
+    const { currentUser } = useContext(UserContext);
     return(
         <div className="navbar">
             <div>
@@ -11,9 +13,11 @@ const Navigation = ()=>{
                 </Link>
             </div>
             <div className="nav-links">
-                <Link className="auth-page-link" to='/auth'>
-                    SIGN IN or SIGN UP
-                </Link>
+                {
+                    currentUser ?  (<Link to='/profile'>{currentUser.photoURL ? (<img className="profile-page" src={currentUser.photoURL}/>) : (<div className="profile-photo-letter-nav-link">{currentUser.displayName[0].toUpperCase()}</div>)}</Link>)
+                                :(<Link className="auth-page-link" to='/auth'>SIGN IN or SIGN UP
+                                    </Link>)
+                }
             </div>
         </div>
     )

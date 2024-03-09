@@ -2,7 +2,7 @@ import FormInput from "../form-input/form-input.component";
 import Button from "../Button/button.component";
 import './sign-in-form.styles.css';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { 
     createAuthUserDocument,
@@ -10,6 +10,7 @@ import {
     signInWithGooglePopup,
     auth
  } from '../../utility/firebase/firebase.utils';
+import { UserContext } from "../../Contexts/user.context";
  // Initial value of the form fields
 const defaultFormFields = {
     email:'',
@@ -18,16 +19,16 @@ const defaultFormFields = {
 
 const SignInForm = ()=>{
     const [formFields, setFormFields] = useState(defaultFormFields)
-    console.log(formFields);
-
+    
+    const { setCurrentUser } = useContext(UserContext);
     const {email,password} = formFields;
 // Success text after successfull Sign in
-    const successMessage = ()=>{
-        document.querySelector(".auth-page").innerHTML = "Successfully signed in!";
-        document.querySelector(".auth-page").style.fontSize = 40 + 'px';
-        document.querySelector(".auth-page").style.fontWeight = 600;
-        document.querySelector(".auth-page").style.color = "green";
-    }
+    // const successMessage = ()=>{
+    //     document.querySelector(".auth-page").innerHTML = "Successfully signed in!";
+    //     document.querySelector(".auth-page").style.fontSize = 40 + 'px';
+    //     document.querySelector(".auth-page").style.fontWeight = 600;
+    //     document.querySelector(".auth-page").style.color = "green";
+    // }
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
@@ -36,9 +37,9 @@ const SignInForm = ()=>{
     const handleSubmit = async(event)=>{
         event.preventDefault();
         try{
-            await signInAuthUserWithEmailAndPassword(email,password);
-            resetFormFields();
-            successMessage();
+            const { user } = await signInAuthUserWithEmailAndPassword(email,password);
+            console.log(user);
+            setCurrentUser(user);
         }catch(error){
             if(error.code === 'auth/invalid-credential'){
                 alert("Error: Invalid email or password");
@@ -60,7 +61,7 @@ const SignInForm = ()=>{
         try{
             const {user} = await signInWithGooglePopup();
             await createAuthUserDocument(user);
-            successMessage();
+            setCurrentUser(user);
         }catch(error){
             console.log('Error: ',error.message);
         }

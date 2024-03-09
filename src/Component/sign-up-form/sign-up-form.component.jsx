@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../Button/button.component";
 import FormInput from "../form-input/form-input.component";
 
@@ -8,6 +8,7 @@ import {
     createAuthUserWithEmailAndPassword,
     createAuthUserDocument
 } from '../../utility/firebase/firebase.utils';
+import { UserContext } from "../../Contexts/user.context";
 
 // Initial values of the form fields
 const defaultFormFields = {
@@ -20,22 +21,23 @@ const defaultFormFields = {
 const SignUpForm = ()=>{
     const [formFields, setFormFields] = useState(defaultFormFields)
     const {displayName,email,password,confirmPassword} = formFields;
-    console.log(formFields);
+    
+    const { setCurrentUser } = useContext(UserContext);
 // Succesfull Sign Up text
-    const successMessage = ()=>{
-            document.querySelector(".auth-page").innerHTML = "Successfully signed up!";
-            document.querySelector(".auth-page").style.fontSize = 40 + 'px';
-            document.querySelector(".auth-page").style.fontWeight = 600;
-            document.querySelector(".auth-page").style.color = "green";
-    }
+    // const successMessage = ()=>{
+    //         document.querySelector(".auth-page").innerHTML = "Successfully signed up!";
+    //         document.querySelector(".auth-page").style.fontSize = 40 + 'px';
+    //         document.querySelector(".auth-page").style.fontWeight = 600;
+    //         document.querySelector(".auth-page").style.color = "green";
+    // }
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
     }
     // Will reset Form fields after successfull sign up
-    const resetFormFields = ()=>{
-        setFormFields(defaultFormFields);
-    }
+    // const resetFormFields = ()=>{
+    //     setFormFields(defaultFormFields);
+    // }
     // This will create a authenticated user and put data into the database
     const handleSubmit = async(event)=>{
         event.preventDefault();
@@ -45,11 +47,10 @@ const SignUpForm = ()=>{
         }
         try{
             const {user} = await createAuthUserWithEmailAndPassword(email,password);
-            console.log(user);
             user.displayName = displayName;
+            const copyUser = user;
             await createAuthUserDocument(user);
-            resetFormFields();
-            successMessage();
+            setCurrentUser(copyUser);
         }catch(error){
             if(error.code === 'auth/email-already-in-use'){
                 alert("Email already in use")
