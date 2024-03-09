@@ -21,6 +21,7 @@
     color: #000;
     font-weight: 550;
     transition: all ease 0.3s;
+    border-radius: 25px;
 }
 .auth-page-link:hover{
     background-color: #ffffff75;

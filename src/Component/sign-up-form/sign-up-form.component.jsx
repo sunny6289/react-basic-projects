@@ -23,21 +23,11 @@ const SignUpForm = ()=>{
     const {displayName,email,password,confirmPassword} = formFields;
     
     const { setCurrentUser } = useContext(UserContext);
-// Succesfull Sign Up text
-    // const successMessage = ()=>{
-    //         document.querySelector(".auth-page").innerHTML = "Successfully signed up!";
-    //         document.querySelector(".auth-page").style.fontSize = 40 + 'px';
-    //         document.querySelector(".auth-page").style.fontWeight = 600;
-    //         document.querySelector(".auth-page").style.color = "green";
-    // }
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
     }
-    // Will reset Form fields after successfull sign up
-    // const resetFormFields = ()=>{
-    //     setFormFields(defaultFormFields);
-    // }
+
     // This will create a authenticated user and put data into the database
     const handleSubmit = async(event)=>{
         event.preventDefault();
@@ -47,10 +37,10 @@ const SignUpForm = ()=>{
         }
         try{
             const {user} = await createAuthUserWithEmailAndPassword(email,password);
+            // console.log(user);
             user.displayName = displayName;
-            const copyUser = user;
             await createAuthUserDocument(user);
-            setCurrentUser(copyUser);
+            setCurrentUser(user);
         }catch(error){
             if(error.code === 'auth/email-already-in-use'){
                 alert("Email already in use")

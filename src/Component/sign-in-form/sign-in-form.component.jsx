@@ -8,7 +8,7 @@ import {
     createAuthUserDocument,
     signInAuthUserWithEmailAndPassword,
     signInWithGooglePopup,
-    auth
+    retrieveName
  } from '../../utility/firebase/firebase.utils';
 import { UserContext } from "../../Contexts/user.context";
  // Initial value of the form fields
@@ -22,13 +22,7 @@ const SignInForm = ()=>{
     
     const { setCurrentUser } = useContext(UserContext);
     const {email,password} = formFields;
-// Success text after successfull Sign in
-    // const successMessage = ()=>{
-    //     document.querySelector(".auth-page").innerHTML = "Successfully signed in!";
-    //     document.querySelector(".auth-page").style.fontSize = 40 + 'px';
-    //     document.querySelector(".auth-page").style.fontWeight = 600;
-    //     document.querySelector(".auth-page").style.color = "green";
-    // }
+
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
@@ -38,7 +32,8 @@ const SignInForm = ()=>{
         event.preventDefault();
         try{
             const { user } = await signInAuthUserWithEmailAndPassword(email,password);
-            console.log(user);
+            // console.log(user);
+            user.displayName = await retrieveName(user);
             setCurrentUser(user);
         }catch(error){
             if(error.code === 'auth/invalid-credential'){

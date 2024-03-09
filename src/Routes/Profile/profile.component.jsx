@@ -17,7 +17,7 @@ const Profile = () => {
         {
             currentUser ? (<div className="profile">
                 {
-                    currentUser.photoURL ? (<img src={currentUser.photoURL} alt={currentUser.displayName[0]} className="profile-photo"/>) : (<div className="profile-photo-letter">{currentUser.displayName[0].toUpperCase()}</div>)
+                    currentUser.photoURL ? (<img src={currentUser.photoURL} alt="pic" className="profile-photo"/>) : currentUser.displayName ? (<div className="profile-photo-letter-nav-link">{currentUser.displayName[0].toUpperCase()}</div>) : (<div className="profile-photo-letter-nav-link">@</div>)
                 }
             
             <h3 className="profile-name">{currentUser.displayName}</h3>

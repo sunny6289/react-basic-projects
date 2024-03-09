@@ -5,6 +5,7 @@ import { useContext } from "react";
 
 const Navigation = ()=>{
     const { currentUser } = useContext(UserContext);
+    // console.log(currentUser);
     return(
         <div className="navbar">
             <div>
@@ -14,7 +15,7 @@ const Navigation = ()=>{
             </div>
             <div className="nav-links">
                 {
-                    currentUser ?  (<Link to='/profile'>{currentUser.photoURL ? (<img className="profile-page" src={currentUser.photoURL}/>) : (<div className="profile-photo-letter-nav-link">{currentUser.displayName[0].toUpperCase()}</div>)}</Link>)
+                    currentUser ?  (<Link to='/profile'>{currentUser.photoURL ? (<img className="profile-page" src={currentUser.photoURL}/>) : currentUser.displayName ? (<div className="profile-photo-letter-nav-link">{currentUser.displayName[0].toUpperCase()}</div>) : (<div className="profile-photo-letter-nav-link">@</div>)}</Link>)
                                 :(<Link className="auth-page-link" to='/auth'>SIGN IN or SIGN UP
                                     </Link>)
                 }

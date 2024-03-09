@@ -35,6 +35,7 @@ provider.setCustomParameters({
 const auth = getAuth();
 
 
+
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 const db = getFirestore();
 
@@ -57,7 +58,14 @@ export const createAuthUserDocument = async (userAuth) => {
         }
         return userDocRef;
 }
-
+export const retrieveName = async(userAuth)=>{
+        const userDocRef = doc(db,'user',userAuth.uid);
+        const docSnapShot = await getDoc(userDocRef);
+        // currentUser.displayName = docSnapShot.displayName;
+        const info = docSnapShot.data();
+        // const {currentUser, setCurrentUser} = useContext(UserContext)
+        return info.displayName;
+}
 export const createAuthUserWithEmailAndPassword = async(email,password) => {
         if (!email || !password) {
                 alert("All fields are required");
@@ -67,6 +75,7 @@ export const createAuthUserWithEmailAndPassword = async(email,password) => {
 }
 
 export const signInAuthUserWithEmailAndPassword = async(email,password)=>{
+        
         if (!email || !password) {
                 alert("All fields are required");
                 return;
