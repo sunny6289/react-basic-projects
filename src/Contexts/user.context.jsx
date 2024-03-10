@@ -13,6 +13,7 @@ export const UserProvider = ({children})=>{
 
     useEffect(()=>async()=>{
         const removeListener = onAuthStateChangedListener(async(user)=>{
+            
             if(user){
                 await createAuthUserDocument(user);
                 if(user.displayName===null){
