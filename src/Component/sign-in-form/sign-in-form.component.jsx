@@ -2,13 +2,11 @@ import FormInput from "../form-input/form-input.component";
 import Button from "../Button/button.component";
 import './sign-in-form.styles.css';
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import { 
-    createAuthUserDocument,
     signInAuthUserWithEmailAndPassword,
-    signInWithGooglePopup,
-    retrieveName
+    signInWithGooglePopup
  } from '../../utility/firebase/firebase.utils';
 import { UserContext } from "../../Contexts/user.context";
  // Initial value of the form fields
@@ -20,7 +18,6 @@ const defaultFormFields = {
 const SignInForm = ()=>{
     const [formFields, setFormFields] = useState(defaultFormFields)
     
-    const { setCurrentUser } = useContext(UserContext);
     const {email,password} = formFields;
 
     const handleChange = (event)=>{
@@ -31,16 +28,16 @@ const SignInForm = ()=>{
     const handleSubmit = async(event)=>{
         event.preventDefault();
         try{
-            const { user } = await signInAuthUserWithEmailAndPassword(email,password);
-            // console.log(user);
-            user.displayName = await retrieveName(user);
-            setCurrentUser(user);
+            await signInAuthUserWithEmailAndPassword(email,password);
         }catch(error){
             if(error.code === 'auth/invalid-credential'){
                 alert("Error: Invalid email or password");
                 resetFormFields();
             }else if(error.code === 'auth/too-many-requests'){
                 alert("Error: Too many requests");
+                resetFormFields();
+            }else if(error.code === 'auth/user-disabled'){
+                alert("Error: Your account has been disabled by the developer");
                 resetFormFields();
             }
             console.log(error.message);
@@ -54,9 +51,7 @@ const SignInForm = ()=>{
     // It will help in sign in with google
     const signInWithGoogle = async()=>{
         try{
-            const {user} = await signInWithGooglePopup();
-            await createAuthUserDocument(user);
-            setCurrentUser(user);
+            await signInWithGooglePopup();
         }catch(error){
             console.log('Error: ',error.message);
         }
